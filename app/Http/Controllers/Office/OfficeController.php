@@ -10,36 +10,36 @@ class OfficeController extends Controller
     //
     public function show()
     {
-
+    	return view('office.home');
     }
 
     public function createPage()
     {
-
+    	return view('office.create');
     }
 
-    public function create ()
+    public function create (Request $request)
     {
 
     }
 
     public function editPage()
     {
-
+    	return view('office.edit');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
 
     }
 
     public function showArchieved()
     {
-
+    	return view('office.archieved');
     }
 
-    public function archieve()
+    public function archieve(Request $request)
     {
-    	
+
     }
 }

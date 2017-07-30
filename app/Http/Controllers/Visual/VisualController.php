@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 class VisualController extends Controller
 {
     //
-    public function console()
+    public function console(Request $request)
     {
-
+    	return view('visual.console');
     }
 
-    public function display()
+    public function display(Request $request)
     {
-    	
+    	return view('visual.display');
     }
 }
