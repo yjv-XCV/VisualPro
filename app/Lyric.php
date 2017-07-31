@@ -3,21 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Project;
-use App\Configuration;
+use App\Song;
 
 class Lyric extends Model
 {
     //
     protected $table = 'lyrics';
     
-    public function project()
+    public function song()
     {
-        return $this->belongsTo(Project::class,'project_id');
+        return $this->belongsTo(Song::class,'song_id');
     }
 
-    public function configuration()
-    {
-    	return $this->belongsTo(Configuration::class, 'configuration_id');
-    }
 }

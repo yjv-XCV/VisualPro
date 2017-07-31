@@ -3,8 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Lyric;
 use App\Configuration;
+use App\Song;
 
 class Project extends Model
 {
@@ -16,8 +16,10 @@ class Project extends Model
         return $this->hasMany(Configuration::class,'project_id');
     }
 
-    public function lyrics()
+    public function songs()
     {
-    	return $this->hasMany(Lyric::class, 'project_id');
+    	return $this->belongsToMany(Song::class,'project_song','project_id','song_id');
     }
+
+    
 }

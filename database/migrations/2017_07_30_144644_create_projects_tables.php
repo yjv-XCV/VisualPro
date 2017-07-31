@@ -17,7 +17,8 @@ class CreateProjectsTables extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->boolean('archieved')->default(false);
+            $table->string('description');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
 
@@ -35,14 +36,25 @@ class CreateProjectsTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('songs', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
+            $table->string('album_id')->nullable();
+            $table->string('artist_id')->nullable();
+        });
+
+        Schema::create('projects_songs', function(Blueprint $table){
+            $table->integer('project_id')->unsigned();
+            $table->integer('song_id')->unsigned();
+        });
+
         Schema::create('lyrics', function (Blueprint $table){
             $table->increments('id');
             $table->string('zh');
             $table->string('en');
             $table->integer('sequence')->unsigned()->index();
             $table->string('label')->nullable();
-            $table->integer('project_id')->unsigned();
-            $table->integer('configuration_id')->unsigned();
+            $table->integer('song_id')->unsigned();
         });
     }
 
