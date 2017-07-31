@@ -9,6 +9,9 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="/semantic/dist/semantic.js"></script>
 
         <!-- Styles -->
         <style>
@@ -20,6 +23,22 @@
                 height: 100vh;
                 margin: 0;
             }
+
+            body{
+                animation: trans_bg 2s ease-in-out 1;
+                background-color: black;
+            }
+            @keyframes trans_bg {
+              0% {background-color: white;}
+              5% {background-color: red;}
+              10% {background-color: orange;}
+              15% {background-color: yellow;}
+              20% {background-color: green;}
+              25% {background-color: blue;}
+              30% {background-color: violet;}
+              35% {background-color: purple;}
+              100% {background-color: black;}
+            } 
 
             .full-height {
                 height: 100vh;
@@ -49,6 +68,12 @@
                 font-size: 84px;
             }
 
+            .subheader{
+                font-size: 16px;
+                margin-top: 70px;
+                position:absolute;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -66,30 +91,21 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Visual Pro
                 </div>
             </div>
+            <div class="subheader">Press spacebar to continue</div>
         </div>
     </body>
+    <script>
+        $(document).on('keypress', function(pressed){
+            keypressed = pressed.keyCode ? pressed.keyCode : pressed.which;
+            if(keypressed == 32)window.location = '/office';
+        });
+        setInterval(function(){
+            $('.subheader').toggle();
+        },600);
+    </script>
 </html>

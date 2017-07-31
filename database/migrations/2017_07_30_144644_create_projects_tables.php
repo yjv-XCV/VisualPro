@@ -32,6 +32,7 @@ class CreateProjectsTables extends Migration
             $table->string('font')->nullable();
             $table->string('font_color')->nullable();
             $table->integer('positionY')->unsigned()->default(0);
+            $table->string('font-style')->nullable();
             $table->string('text_aligned')->default('center');
             $table->timestamps();
         });
@@ -41,6 +42,17 @@ class CreateProjectsTables extends Migration
             $table->string('name');
             $table->string('album_id')->nullable();
             $table->string('artist_id')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('albums', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
+        });
+
+        Schema::create('artists', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
         });
 
         Schema::create('projects_songs', function(Blueprint $table){
@@ -55,6 +67,7 @@ class CreateProjectsTables extends Migration
             $table->integer('sequence')->unsigned()->index();
             $table->string('label')->nullable();
             $table->integer('song_id')->unsigned();
+            $table->timestamps();
         });
     }
 
@@ -69,5 +82,9 @@ class CreateProjectsTables extends Migration
         Schema::dropIfExists('projects');
         Schema::dropIfExists('configurations');
         Schema::dropIfExists('lyrics');
+        Schema::dropIfExists('songs');
+        Schema::dropIfExists('projects_songs');
+        Schema::dropIfExists('albums');
+        Schema::dropIfExists('artists');
     }
 }

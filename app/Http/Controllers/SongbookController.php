@@ -1,30 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Office;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class OfficeController extends Controller
+class SongbookController extends Controller
 {
     //
     public function show()
     {
-    	return view('office.home');
+    	return view('office.songbook.home');
     }
 
     public function create (Request $request)
     {
-        $this->validate($request, [
-            'name' =>'required'
-        ]);
         dd($request->toArray());
     }
 
     public function edit(Request $request)
     {
         dd($request->toArray());
-    	return view('office.edit');
+    	return view('office.songbook.edit');
     }
 
     public function save(Request $request)
@@ -34,7 +30,7 @@ class OfficeController extends Controller
 
     public function archieved()
     {
-    	return view('office.archived');
+    	return view('office.songbook.archived');
     }
 
     public function archieve(Request $request)

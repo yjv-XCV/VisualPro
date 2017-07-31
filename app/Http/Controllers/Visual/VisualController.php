@@ -10,6 +10,7 @@ class VisualController extends Controller
     //
     public function console(Request $request)
     {
+        dd($request->toArray());
     	return view('visual.console');
     }
 
