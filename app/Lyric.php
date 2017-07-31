@@ -12,7 +12,7 @@ class Lyric extends Model
     
     public function song()
     {
-        return $this->belongsTo(Song::class,'song_id');
+        return $this->belongsTo(Song::class, 'song_id');
     }
 
 }

@@ -18,7 +18,7 @@ class CreateProjectsTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->boolean('archived')->default(false);
+            $table->boolean('archived')->default(false)->index();
             $table->timestamps();
         });
 
@@ -28,20 +28,12 @@ class CreateProjectsTables extends Migration
             $table->string('background_img')->nullable();
             $table->integer('project_id')->unsigned()->index();
             //properties
-            $table->integer('font_size')->unsigned()->default(20);
+            $table->integer('y_offset')->unsigned()->default(0);
             $table->string('font')->nullable();
+            $table->integer('font_size')->unsigned()->default(3);
             $table->string('font_color')->nullable();
-            $table->integer('positionY')->unsigned()->default(0);
-            $table->string('font-style')->nullable();
+            $table->string('font_style')->nullable();
             $table->string('text_aligned')->default('center');
-            $table->timestamps();
-        });
-
-        Schema::create('songs', function(Blueprint $table){
-            $table->increments('id');
-            $table->string('name');
-            $table->string('album_id')->nullable();
-            $table->string('artist_id')->nullable();
             $table->timestamps();
         });
 
@@ -55,9 +47,24 @@ class CreateProjectsTables extends Migration
             $table->string('name');
         });
 
+        Schema::create('songs', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
+            $table->string('album_id')->nullable()->index();
+            $table->string('artist_id')->nullable()->index();
+            $table->boolean('archived')->default(false)->index();
+            $table->timestamps();
+        });
+
+
         Schema::create('projects_songs', function(Blueprint $table){
             $table->integer('project_id')->unsigned();
             $table->integer('song_id')->unsigned();
+
+            $table->foreign('project_id')
+                  ->references('id')
+                  ->on('projects')
+                  ->onDelete('cascade');
         });
 
         Schema::create('lyrics', function (Blueprint $table){
@@ -79,12 +86,12 @@ class CreateProjectsTables extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('projects');
-        Schema::dropIfExists('configurations');
         Schema::dropIfExists('lyrics');
-        Schema::dropIfExists('songs');
         Schema::dropIfExists('projects_songs');
+        Schema::dropIfExists('configurations');
+        Schema::dropIfExists('songs');
         Schema::dropIfExists('albums');
         Schema::dropIfExists('artists');
+        Schema::dropIfExists('projects');
     }
 }

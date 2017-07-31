@@ -13,12 +13,12 @@ class Project extends Model
 
     public function configurations()
     {
-        return $this->hasMany(Configuration::class,'project_id');
+        return $this->hasMany(Configuration::class, 'project_id');
     }
 
     public function songs()
     {
-    	return $this->belongsToMany(Song::class,'project_song','project_id','song_id');
+    	return $this->belongsToMany(Song::class, 'projects_songs', 'project_id', 'song_id');
     }
 
     

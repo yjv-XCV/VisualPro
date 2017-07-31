@@ -1,72 +1,78 @@
-@extends('layouts.master')
+@extends('office.layout')
 
 @section('title')
-Visual Pro
+Home:
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="/css/office.css">
 @endsection
 
-@section('content')
-	<div class="ui inverted segment right visible sidebar">
-		<div class="ui relaxed inverted divided list">
-			@for($i=1;$i<=3;$i++)
-			<div class="item project" id="{{$i}}">
-				<div class="content">
-					<div class="header">{{$i}}</div>
-					This is a demo
-				</div>
-			</div>
-			@endfor
-			<div class="ui left icon item" id="create">
-				<div class="ui inverted fluid button">
-					<i class="ui plus icon"></i>
-					Create
-				</div>
-			</div>
-		</div>
-	</div>
+@section('sidebar')
 
-<div class="ui pusher">
-	<div class="flex-center position-ref full-height">
-      <div class="preview-project">
-				<div class="flex-center position-ref container-height">
-	      	<div class="content">
-						<div id="title"></div>
-					</div>
-      	</div>
-      </div>
-  </div>
-		<div class="buttons-container">
-			<a class="ui black right labeled icon button" href="office/songbook">
-				<i class="ui music icon"></i>
-				Songbook
-			</a>
-			<div class="ui buttons">
-				<form method="GET" action="\visual\console" accept-charset="UTF-8">
-					<input name="project_id" type="hidden" value="" id="view-selector">
-					<button class="ui black right labeled icon button" type="submit">
-						<i class="ui unhide icon"></i>
-						View
-					</button>
-				</form>				
-				<form method="GET" action="\office\edit" accept-charset="UTF-8">
-					<input name="project_id" type="hidden" value="" id="edit-selector">
-					<button class="ui black right labeled icon button" type="submit">
-						<i class="ui pencil icon"></i>
-						Edit
-					</button>
-				</form>
-			</div>
-				<div class="ui black right labeled icon button" id="archive">
-					<i class="ui archive icon"></i>
-					Archive
-				</div>
+@forelse($projects as $project)
+<div class="item project" id="{{$project->id}}" data-name="{{$project->name}}" data-description="{{$project->description}}">
+	<div class="content">
+		<div class="header" id="projectname">{{$project->name}}</div>
+	</div>
+</div>
+@empty
+<div class="item project" id="This is an Empty Project">
+	<div class="content">
+		<div class="header">No project created yet</div>
+		Create a new project now!
+	</div>
+</div>
+@endforelse
+<div class="ui left icon item" id="create">
+	<div class="ui inverted fluid button">
+		<i class="ui plus icon"></i>
+		Create new project
+	</div>
+</div>
+
+@endsection
+
+@section('preview')
+
+<div class="content">
+	<div id="title">
+	</div>
+</div>
+
+@endsection
+
+@section('controls')
+
+<div class="buttons-container">
+	<a class="ui black right labeled icon button" href="office/songbook">
+		<i class="ui music icon"></i>
+		Songbook
+	</a>
+	<div class="ui buttons">
+		<form method="GET" action="\visual\console" accept-charset="UTF-8">
+			<input name="projectID" type="hidden" value="" id="view-selector">
+			<button class="ui black right labeled icon button" type="submit">
+				<i class="ui unhide icon"></i>
+				View
+			</button>
+		</form>				
+		<form method="GET" action="\office\project" accept-charset="UTF-8">
+			<input name="projectID" type="hidden" value="" id="edit-selector">
+			<button class="ui black right labeled icon button" type="submit">
+				<i class="ui pencil icon"></i>
+				Edit
+			</button>
+		</form>
+	</div>
+		<div class="ui black right labeled icon button" id="archive">
+			<i class="ui archive icon"></i>
+			Archive
 		</div>
 </div>
 
+@endsection
 
+@section('modal')
 
 <!-- Create Modal -->
 <div class="ui create modal">
@@ -118,8 +124,9 @@ Visual Pro
 </div>
 
 <!-- Archive modal -->
+
 @endsection
 
 @section('script')
-<script src="/js/office.js"></script>
+<script src="/js/office/home.js"></script>
 @endsection

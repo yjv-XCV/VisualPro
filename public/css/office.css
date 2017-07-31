@@ -88,3 +88,35 @@ body{
 .bold{
     font-weight: bold;
 }
+
+.project:hover{
+    background-color: grey;
+}
+
+.dragable.box{
+    position:absolute;
+    left: 20vw;
+    bottom:0px;
+    height:22vh;
+    width:45vw;
+    background-color: cyan;
+}
+
+#upsize{
+    position:relative;
+}
+#downsize{
+    position:relative;
+}
+
+#superscript{
+    font-size:12px;
+    position:absolute;
+    right:15px;
+    top:5px;
+}
+
+#projectname{
+    font-size: 1.4rem;
+    padding: 6px 0px;
+}

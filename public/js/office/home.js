@@ -1,12 +1,15 @@
 //Home page
 var title = $('#title');
+var description = $('#description')
 var viewSelector = $('#view-selector');
 var editSelector = $('#edit-selector');
 var hoverProjectFlag = 1;
 var showProject = function(selected){
 	//This is where we set the display
 	id = selected.attr('id');
-	title.html(id);
+	name = selected.data('name');
+	description = selected.data('description');
+	title.html(name);
 	viewSelector.val(id);
 	editSelector.val(id);
 }
